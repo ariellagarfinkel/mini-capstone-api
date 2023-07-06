@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  "/product_path"
+  get "/product", controller: "products", action: "product"
 end
