@@ -15,8 +15,17 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.create(name: params["name"], price: params["price"], image_url: params["image_url"], description: params["description"])
-    render :show
+    @product = Product.create(
+      name: params["name"],
+      price: params["price"],
+      image_url: params["image_url"],
+      description: params["description"],
+    )
+    if @product.save
+      render :show
+    else
+      render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def update
@@ -25,7 +34,7 @@ class ProductsController < ApplicationController
                     price: params["price"] || @product.price,
                     image_url: params["image_url"] || @product.image_url,
                     description: params["description"] || @product.description)
-
+    if @product
     render :show
   end
 
