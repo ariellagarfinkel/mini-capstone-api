@@ -35,7 +35,10 @@ class ProductsController < ApplicationController
                     image_url: params["image_url"] || @product.image_url,
                     description: params["description"] || @product.description)
     if @product
-    render :show
+      render :show
+    else
+      render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -44,6 +47,3 @@ class ProductsController < ApplicationController
     render json: { message: "Deleted" }
   end
 end
-
-#render :show
-#render :index
