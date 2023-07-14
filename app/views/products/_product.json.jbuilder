@@ -9,3 +9,4 @@ json.description product.description
 json.quantity product.quantity
 json.supplier_id product.supplier_id  #this is an attribute
 json.supplier product.supplier         #this is a model method
+json.url images.url
