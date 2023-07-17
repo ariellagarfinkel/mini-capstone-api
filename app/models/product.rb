@@ -1,15 +1,16 @@
 class Product < ApplicationRecord
   validates :price, presence: true
   validates :price, numericality: { greater_than: 0 }
-  # validates :quantity, presence: true
-  #validates :description, presence: true
-  #validates :image_url, presence: true
-  #validates :name, presence: true
-  #validates :price, :quantity, :description, :image_url, :name, presence: true
+  validates :quantity, presence: true
+  validates :quantity, numericality: { greater_than: 0 }
+  validates :description, presence: true
+  validates :name, presence: true
+  #validates :price, :quantity, :description, :name, presence: true
 
-  def supplier
-    Supplier.find_by(id: supplier_id)
-  end
+  belongs_to :supplier
+  # def supplier
+  #   Supplier.find_by(id: supplier_id)
+  # end
 
   # def images
   #   Image.

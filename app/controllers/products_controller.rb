@@ -10,16 +10,12 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.create(name: "pen", price: 1, image_url: "https://media.gcflearnfree.org/content/55e0730c7dd48174331f5164_01_17_2014/whatisacomputer_desktop_computers.jpg", description: "a utensil that writes with ink")
-    render :show
-  end
-
-  def create
-    @product = Product.create(
+    @product = Product.new(
       name: params["name"],
       price: params["price"],
-      image_url: params["image_url"],
       description: params["description"],
+      quantity: params["quantity"],
+      supplier_id: params["supplier_id"],
     )
     if @product.save
       render :show
@@ -32,7 +28,6 @@ class ProductsController < ApplicationController
     @product = Product.find_by(id: params["id"])
     @product.update(name: params["name"] || @product.name,
                     price: params["price"] || @product.price,
-                    image_url: params["image_url"] || @product.image_url,
                     description: params["description"] || @product.description)
     if @product
       render :show
