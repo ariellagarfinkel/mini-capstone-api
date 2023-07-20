@@ -32,7 +32,11 @@ class OrdersController < ApplicationController
   end
 
   def index
-    @orders = current_user.orders
-    render :index
+    if current_user
+      @orders = current_user.orders
+      render :index
+    else
+      render json: { message: "Please log in to see your orders" }, status: :unauthorized
+    end
   end
 end
