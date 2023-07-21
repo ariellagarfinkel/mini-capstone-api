@@ -8,17 +8,11 @@ class Product < ApplicationRecord
   #validates :price, :quantity, :description, :name, presence: true
 
   belongs_to :supplier
-  has_many :orders
+  # has_many :orders
   has_many :category_products
   has_many :categories, through: :category_products
-  # def supplier
-  #   Supplier.find_by(id: supplier_id)
-  # end
+  has_many :carted_products
 
-  # def images
-  #   Image.
-
-  # end
   def is_discounted
     price <= 10
   end
