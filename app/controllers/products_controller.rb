@@ -29,9 +29,11 @@ class ProductsController < ApplicationController
 
   def update
     @product = Product.find_by(id: params["id"])
-    @product.update(name: params["name"] || @product.name,
-                    price: params["price"] || @product.price,
-                    description: params["description"] || @product.description)
+    @product.update(
+      name: params["name"] || @product.name,
+      price: params["price"] || @product.price,
+      description: params["description"] || @product.description,
+    )
     if @product
       render :show
     else

@@ -4,10 +4,6 @@ class OrdersController < ApplicationController
   def create
     carted_products = current_user.carted_products.where(status: "carted")
 
-    # calculated_subtotal = product.price * params[:quantity].to_i
-    # calculated_tax = product.price * 0.09
-    # calculated_total = calculated_subtotal + calculated_tax
-
     calculated_subtotal = 0
     carted_products.each do |carted_product|
       calculated_subtotal += carted_product.quantity * carted_product.product.price
@@ -25,8 +21,9 @@ class OrdersController < ApplicationController
     )
     if @order.save
       carted_products.update_all(status: "purchased", order_id: @order.id)
-    else
       render :show
+    else
+      render json: { message: "Order didnt save!" }
     end
   end
 
